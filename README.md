@@ -60,10 +60,8 @@ Add a new project by appending an object to the `projects` array in `data/conten
 
 ## Placeholders to replace before publishing
 
-- `data/content.js` → `boosty` (your Boosty URL), `github` (profile URL), `canonicalUrl`
 - `data/content.js` → `game.release`, `game.platforms`, `game.storeUrl` (only when confirmed — don't invent)
 - `index.html` → `og:url`, `canonical`, `og:image`
-- `sitemap.xml` + `robots.txt` → your GitHub Pages URL
 - `assets/game/*.svg` → real screenshots / concept art (webp recommended)
 - `favicon.svg` → optional
 
@@ -78,23 +76,6 @@ python3 -m http.server 8080
 No build step. Opening `index.html` directly also works (all scripts are plain, non-module).
 
 ## Publish on GitHub Pages
-
-### Option A — branch deploy (simplest)
-
-```bash
-git init
-git add .
-git commit -m "initial personal hub"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO.git
-git push -u origin main
-```
-
-Then: repo **Settings → Pages → Source: "Deploy from a branch" → branch `main` → folder `/ (root)` → Save**.
-
-Your site will be at `https://YOUR-USERNAME.github.io/YOUR-REPO/`.
-
-### Option B — GitHub Actions (included)
 
 The repo ships with `.github/workflows/pages.yml`. Enable it via
 **Settings → Pages → Source: "GitHub Actions"**. After that, every push to `main` deploys automatically.
