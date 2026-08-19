@@ -12,14 +12,10 @@
 
 'use strict';
 
-/* --- Placeholders that need your input --------------------------------
-   These stay empty until you add real URLs. The UI handles empty values
-   gracefully (buttons render as "coming soon", links are hidden).
-   -------------------------------------------------------------------- */
 const SOCIALS = {
-  boosty: "",        // TODO: put your Boosty URL here, e.g. "https://boosty.to/your-name"
-  github: "",        // TODO: put your GitHub profile URL here, e.g. "https://github.com/your-name"
-  canonicalUrl: ""   // TODO: your canonical URL, e.g. "https://your-name.github.io/personal-hub/"
+  boosty: "https://boosty.to/eryyynit",
+  github: "https://github.com/eryyynit",
+  canonicalUrl: "https://eryyynit.github.io/personal-hub/"
 };
 
 /* --- UndeadOverhaul ---------------------------------------------------
@@ -135,8 +131,8 @@ const support = {
   me: {
     label: "Support me",
     description:
-      "Support Michael's work — the game and the projects that come after it. " +
-      "Your Boosty link appears here once configured."
+      "Support Michael's work — the game and the projects that come after it.",
+    url: "https://boosty.to/eryyynit"
   },
   artist: {
     label: "Support the artist",
@@ -151,7 +147,7 @@ const footer = {
   line: "Built by hand — no frameworks, no trackers, no nonsense.",
   links: [
     { id: "x", label: "X", url: "https://x.com/Eryyyn_IT" },
-    { id: "github", label: "GitHub", url: "" }, // filled from SOCIALS.github — hidden until set
+    { id: "github", label: "GitHub", url: "https://github.com/EryyynIT" },
     { id: "game", label: "UndeadOverhaul", url: "#game" },
     { id: "artist", label: "Artist", url: "https://boosty.to/manevr" },
     { id: "support", label: "Support", url: "#support" }

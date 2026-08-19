@@ -76,7 +76,7 @@ results.socialsRendered = socials.includes('https://x.com/Eryyyn_IT') &&
 
 // --- Support ---
 const support = registry['support-grid'].innerHTML;
-results.supportMePlaceholder = support.includes('Support me — coming soon'); // boosty empty -> disabled button
+results.supportMeBoosty = support.includes('Support me on Boosty') && support.includes('https://boosty.to/eryyynit'); // boosty configured -> real link
 results.supportArtist = support.includes('https://boosty.to/manevr');
 results.supportSeparated = !/support me on boosty[\s\S]*support the artist[\s\S]*support me on boosty/i.test('');
 
@@ -89,7 +89,7 @@ results.galleryRendered = gallery.includes('screenshot-01.svg') && gallery.inclu
 // --- Footer ---
 const footer = registry['footer-links'].innerHTML;
 results.footerX = footer.includes('https://x.com/Eryyyn_IT');
-results.footerGithubMuted = footer.includes('footer-link-muted'); // placeholder, non-navigating
+results.footerGithub = footer.includes('https://github.com/EryyynIT') && !footer.includes('footer-link-muted'); // github configured -> real, navigable link
 results.footerGame = footer.includes('#game') && footer.includes('UndeadOverhaul');
 
 // --- URL integrity: every rendered relative URL must point to an existing file ---
