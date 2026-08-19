@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="t d">
-  <title id="t">Michael — Developer · GameDev · Builder</title>
-  <desc id="d">Open Graph placeholder cover. Replace with a real 1200x630 cover image.</desc>
+  <title id="t">EryyynIT — Backend Developer · Go / Python</title>
+  <desc id="d">Open Graph cover for the personal hub of EryyynIT. Replace with a real 1200x630 cover image.</desc>
   <defs>
     <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
       <path d="M60 0H0V60" fill="none" stroke="#1d242d" stroke-width="1"/>
@@ -14,9 +14,9 @@
   <rect width="1200" height="630" fill="url(#grid)"/>
   <rect width="1200" height="630" fill="url(#glow)"/>
   <rect y="0" width="1200" height="5" fill="#5ebfb0" opacity="0.8"/>
-  <text x="600" y="250" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="26" letter-spacing="8" fill="#5ebfb0">MICHAEL</text>
-  <text x="600" y="340" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="54" font-weight="700" letter-spacing="1" fill="#e9ebee">I build software, games,</text>
-  <text x="600" y="404" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="54" font-weight="700" letter-spacing="1" fill="#e9ebee">and new things.</text>
-  <text x="600" y="468" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18" letter-spacing="6" fill="#98a2ad">DEVELOPER · GAMEDEV · BUILDER</text>
-  <text x="600" y="540" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" letter-spacing="2" fill="#5ebfb0">UNDEADOVERHAUL</text>
+  <text x="600" y="235" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="30" letter-spacing="8" fill="#5ebfb0">ERYYYNIT</text>
+  <text x="600" y="340" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="50" font-weight="700" letter-spacing="1" fill="#e9ebee">I build software, games,</text>
+  <text x="600" y="400" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="50" font-weight="700" letter-spacing="1" fill="#e9ebee">and things that</text>
+  <text x="600" y="460" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="50" font-weight="700" letter-spacing="1" fill="#e9ebee">weren't here yesterday.</text>
+  <text x="600" y="528" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="17" letter-spacing="6" fill="#98a2ad">BACKEND DEVELOPER · GO / PYTHON</text>
 </svg>

@@ -306,8 +306,8 @@
 
     var meUrl = CONTENT.boosty;
     var meBtn = meUrl
-      ? '<a class="btn btn-primary btn-block" href="' + esc(meUrl) + '" target="_blank" rel="noopener noreferrer">' + icon('boosty') + '<span>Support me on Boosty</span>' + icon('external') + '</a>'
-      : '<button class="btn btn-primary btn-block" type="button" disabled title="Boosty link not set yet — add it in data/content.js (boosty)">' + icon('boosty') + '<span>Support me — coming soon</span></button>';
+      ? '<a class="btn btn-primary btn-block" href="' + esc(meUrl) + '" target="_blank" rel="noopener noreferrer">' + icon('boosty') + '<span>Support on Boosty</span>' + icon('external') + '</a>'
+      : '<button class="btn btn-primary btn-block" type="button" disabled title="Boosty link not set yet — add it in data/content.js (boosty)">' + icon('boosty') + '<span>Support on Boosty — coming soon</span></button>';
 
     var artistUrl = sp.artist && sp.artist.url;
     grid.innerHTML =
