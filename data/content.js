@@ -2,7 +2,8 @@
    Personal hub — site content & configuration
    ---------------------------------------------------------------------
    This file is the single source of truth for editable content:
-   placeholders, socials, projects, team, game info, support and footer.
+   identity, build areas, projects, current work, socials, team,
+   game info, support and footer.
 
    HOW TO USE
    - Replace every "TODO:" before publishing.
@@ -14,7 +15,7 @@
 
 const SOCIALS = {
   boosty: "https://boosty.to/eryyynit",
-  github: "https://github.com/eryyynit",
+  github: "https://github.com/EryyynIT",
   canonicalUrl: "https://eryyynit.github.io/personal-hub/"
 };
 
@@ -28,7 +29,7 @@ const GAME_INFO = {
   tagline: "An indie game in active development.",
   status: "In development",
   description:
-    "UndeadOverhaul is a two-person indie game project. Michael handles the code and engineering, " +
+    "UndeadOverhaul is a two-person indie game project. EryyynIT handles the code and engineering, " +
     "the artist owns the visual development. We're building it in the open — progress and devlogs " +
     "land on the official Telegram channel.",
   // TODO: fill in only confirmed facts — do not invent:
@@ -44,15 +45,38 @@ const GAME_INFO = {
 
 /* --- Site-wide identity ---------------------------------------------- */
 const siteConfig = {
-  name: "Michael",
-  role: "Developer · GameDev · Builder",
+  name: "EryyynIT",
+  person: "Michael",          // legal/first name — mentioned in About, never the brand
+  role: "Backend Developer · Go / Python",
   tagline: "I build software, games, and things that weren't here yesterday."
 };
+
+/* --- What I build -----------------------------------------------------
+   Three lanes shown instead of skill bars. Each card renders
+   automatically: title, description, technology chips.
+   -------------------------------------------------------------------- */
+const buildAreas = [
+  {
+    title: "Backend",
+    desc: "Services, APIs and the systems that hold things together.",
+    tech: ["Go", "Python", "FastAPI", "PostgreSQL", "Redis", "Kafka"]
+  },
+  {
+    title: "Infrastructure",
+    desc: "Getting things to build, ship and stay observable.",
+    tech: ["Docker", "Kubernetes", "CI/CD", "Prometheus", "Grafana"]
+  },
+  {
+    title: "Experiments",
+    desc: "AI tools, game prototypes and small things built to learn something.",
+    tech: ["AI", "Game development", "Prototypes", "Tools"]
+  }
+];
 
 /* --- Projects ---------------------------------------------------------
    Cards are rendered from this array. Add new projects here and they
    appear on the page automatically. Fields: title, type, status,
-   description, technologies[], url, urlLabel, image, imageAlt.
+   description, technologies[], why?, url, urlLabel, image, imageAlt.
    -------------------------------------------------------------------- */
 const projects = [
   {
@@ -61,24 +85,121 @@ const projects = [
     status: "In development",
     description:
       "An indie game project in active development, built as a two-person team — " +
-      "code and engineering by Michael, art and visual development by the artist.",
+      "code and engineering by EryyynIT, art and visual development by the artist.",
     technologies: ["Indie Game", "Two-person team"],
+    why: "Building a game in the open — devlogs on Telegram, progress visible as it happens.",
     url: "#game",
     urlLabel: "See the project",
     image: "assets/game/cover.svg",
     imageAlt: "UndeadOverhaul — placeholder cover art"
+  },
+  {
+    title: "Async Payment Processing Service",
+    type: "Backend · Python",
+    status: "Experiment",
+    description:
+      "An event-driven payment microservice built with FastAPI and RabbitMQ — outbox pattern, " +
+      "dead letter queue, idempotency and webhook notifications. A deep-dive into reliable " +
+      "messaging and retry logic.",
+    technologies: ["FastAPI", "RabbitMQ", "PostgreSQL", "Docker"],
+    why: "Built to get comfortable with event-driven architecture and failure handling in real systems.",
+    url: "https://github.com/EryyynIT/async-payment-processing-service",
+    urlLabel: "View on GitHub",
+    image: "assets/projects/async-payment.svg",
+    imageAlt: "Async Payment Processing Service — placeholder cover"
+  },
+  {
+    title: "queue",
+    type: "Backend · Go",
+    status: "Experiment",
+    description:
+      "A small in-memory queue broker written in Go, stdlib only, exposed over an HTTP API " +
+      "with two endpoints. Built to understand FIFO semantics and concurrency without a " +
+      "framework in the way.",
+    technologies: ["Go", "stdlib", "HTTP API"],
+    why: "Wanted to feel how a queue works from the inside before reaching for the big tools.",
+    url: "https://github.com/EryyynIT/queue",
+    urlLabel: "View on GitHub",
+    image: "assets/projects/queue.svg",
+    imageAlt: "queue — placeholder cover"
+  },
+  {
+    title: "MailingTGBot",
+    type: "Bot · Python",
+    status: "Tool",
+    description:
+      "A Telegram broadcasting bot in aiogram v3 — admin, sub-admin and moderator management, " +
+      "plus a mailing system that sends messages to users.",
+    technologies: ["Python", "aiogram v3"],
+    why: "A real-world tool that had to handle roles, permissions and bulk messaging.",
+    url: "https://github.com/EryyynIT/MailingTGBot",
+    urlLabel: "View on GitHub",
+    image: "assets/projects/mailing-tgbot.svg",
+    imageAlt: "MailingTGBot — placeholder cover"
+  },
+  {
+    title: "go-exercises",
+    type: "Learning · Go",
+    status: "Ongoing",
+    description:
+      "Self-made Go exercises — goroutines, channels, workers, select, cancellation, error " +
+      "handling and project layout — each one a small task with a written solution.",
+    technologies: ["Go", "Concurrency"],
+    why: "The most honest way to learn a language: write the exercises yourself.",
+    url: "https://github.com/EryyynIT/go-exercises",
+    urlLabel: "View on GitHub",
+    image: "assets/projects/go-exercises.svg",
+    imageAlt: "go-exercises — placeholder cover"
+  },
+  {
+    title: "Tic-Tac-ToeAI",
+    type: "Game · Python",
+    status: "Prototype",
+    description:
+      "A Pygame tic-tac-toe you can play against an AI. An early experiment — the one that " +
+      "started the habit of building small games.",
+    technologies: ["Python", "Pygame"],
+    why: "Small games are the best way to keep the fun in programming.",
+    url: "https://github.com/EryyynIT/Tic-Tac-ToeAI",
+    urlLabel: "View on GitHub",
+    image: "assets/projects/tic-tac-toe-ai.svg",
+    imageAlt: "Tic-Tac-ToeAI — placeholder cover"
   }
 ];
+
+/* --- Currently building ----------------------------------------------
+   Rendered as a terminal-styled block. Only real, verifiable work —
+   keep it honest.
+   -------------------------------------------------------------------- */
+const building = {
+  lines: [
+    {
+      text: "UndeadOverhaul — an indie game in active development.",
+      url: "#game",
+      label: "see the game"
+    },
+    {
+      text: "Backend experiments — a Go queue broker and a FastAPI payment microservice.",
+      url: "https://github.com/EryyynIT",
+      label: "on GitHub"
+    },
+    {
+      text: "Go exercises — goroutines, channels, workers and the rest.",
+      url: "https://github.com/EryyynIT/go-exercises",
+      label: "repo"
+    }
+  ]
+};
 
 /* --- Team --------------------------------------------------------------
    Two people behind UndeadOverhaul. Keep roles and links factual.
    -------------------------------------------------------------------- */
 const team = [
   {
-    name: "Michael",
+    name: "EryyynIT",
     role: "Developer / Programmer",
     about: "Code, systems and everything that makes the game actually run.",
-    avatarText: "M",
+    avatarText: "E",
     links: [
       { id: "x", label: "X", url: "https://x.com/Eryyyn_IT" },
       { id: "tiktok", label: "TikTok", url: "https://www.tiktok.com/@barbaris.yt" }
@@ -97,8 +218,22 @@ const team = [
   }
 ];
 
-/* --- Social links (Find me section) ---------------------------------- */
+/* --- Find me (social links) ------------------------------------------ */
 const socials = [
+  {
+    id: "github",
+    label: "GitHub",
+    handle: "@EryyynIT",
+    url: "https://github.com/EryyynIT",
+    note: "Code, projects and experiments — everything I build lives here."
+  },
+  {
+    id: "boosty",
+    label: "Boosty",
+    handle: "@EryyynIT",
+    url: "https://boosty.to/eryyynit",
+    note: "Devlogs, technical notes and support for independent development."
+  },
   {
     id: "x",
     label: "X",
@@ -136,9 +271,9 @@ const socials = [
 const support = {
   intro: "If you enjoy what I build — the game, the devlogs, the experiments — you can support the people behind it.",
   me: {
-    label: "Support me",
+    label: "Support EryyynIT",
     description:
-      "Support Michael's work — the game and the projects that come after it.",
+      "Support the developer's work — the game and the projects that come after it.",
     url: "https://boosty.to/eryyynit"
   },
   artist: {
@@ -155,6 +290,7 @@ const footer = {
   links: [
     { id: "x", label: "X", url: "https://x.com/Eryyyn_IT" },
     { id: "github", label: "GitHub", url: "https://github.com/EryyynIT" },
+    { id: "boosty", label: "Boosty", url: "https://boosty.to/eryyynit" },
     { id: "game", label: "UndeadOverhaul", url: "#game" },
     { id: "artist", label: "Artist", url: "https://boosty.to/manevr" },
     { id: "support", label: "Support", url: "#support" }
@@ -166,6 +302,8 @@ const footer = {
    -------------------------------------------------------------------- */
 window.SITE_CONTENT = {
   site: siteConfig,
+  buildAreas: buildAreas,
+  building: building,
   socials: socials,
   projects: projects,
   game: GAME_INFO,
