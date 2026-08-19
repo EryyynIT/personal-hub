@@ -137,6 +137,7 @@
               (p.status ? '<span class="status-badge">' + esc(p.status) + '</span>' : '') +
             '</div>' +
             '<p class="project-desc">' + esc(p.description) + '</p>' +
+            (p.why ? '<p class="project-why">' + esc(p.why) + '</p>' : '') +
             (tech ? '<div class="project-tech">' + tech + '</div>' : '') +
             (href !== '#' ? '<a class="project-link" href="' + esc(href) + '"' + rel + '>' + esc(p.urlLabel || 'View project') + arrow + '</a>' : '') +
           '</div>' +
@@ -149,18 +150,53 @@
   function renderProjectsNote() {
     var note = $('#projects-note');
     if (!note) return;
-    var list = CONTENT.socials || [];
-    var x = null, tk = null;
-    list.forEach(function (s) {
-      if (s.id === 'x') x = s.url;
-      if (s.id === 'tiktok') tk = s.url;
-    });
-    var parts = [];
-    if (x) parts.push('<a href="' + esc(x) + '" target="_blank" rel="noopener noreferrer">on X</a>');
-    if (tk) parts.push('<a href="' + esc(tk) + '" target="_blank" rel="noopener noreferrer">on TikTok</a>');
-    if (parts.length) {
-      note.innerHTML = 'More projects are in progress — follow along ' + parts.join(' or ') + '.';
+    var gh = CONTENT.github;
+    if (gh) {
+      note.innerHTML = 'More projects are in progress — follow the repos ' +
+        '<a href="' + esc(gh) + '" target="_blank" rel="noopener noreferrer">on GitHub</a>.';
     }
+  }
+
+  /* ---------- Render: build areas ---------- */
+  function renderBuildAreas() {
+    var grid = $('#build-grid');
+    if (!grid) return;
+    var list = CONTENT.buildAreas || [];
+
+    grid.innerHTML = list.map(function (a) {
+      var tech = (a.tech || []).map(function (t) {
+        return '<span class="chip">' + esc(t) + '</span>';
+      }).join('');
+      return (
+        '<article class="card build-card reveal">' +
+          '<h3 class="build-title">' + esc(a.title) + '</h3>' +
+          '<p class="build-desc">' + esc(a.desc) + '</p>' +
+          '<div class="build-tech">' + tech + '</div>' +
+        '</article>'
+      );
+    }).join('');
+  }
+
+  /* ---------- Render: currently building ---------- */
+  function renderBuilding() {
+    var linesEl = $('#building-lines');
+    if (!linesEl) return;
+    var data = CONTENT.building || {};
+
+    linesEl.innerHTML = (data.lines || []).map(function (l) {
+      var link = l.url
+        ? '<a class="term-link" href="' + esc(l.url) + '"' +
+          (isExternal(l.url) ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' +
+          esc(l.label || 'more') + '</a>'
+        : '';
+      return (
+        '<p class="term-line" role="listitem">' +
+          '<span class="term-bullet" aria-hidden="true">▸</span>' +
+          '<span class="term-text">' + esc(l.text) + '</span>' +
+          link +
+        '</p>'
+      );
+    }).join('');
   }
 
   /* ---------- Render: game ---------- */
@@ -373,8 +409,10 @@
   }
 
   /* ---------- Init ---------- */
+  renderBuildAreas();
   renderProjects();
   renderProjectsNote();
+  renderBuilding();
   renderGame();
   renderTeam();
   renderSocials();
