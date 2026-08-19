@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img" aria-labelledby="t d">
+  <title id="t">UndeadOverhaul placeholder cover</title>
+  <desc id="d">Placeholder artwork for the game UndeadOverhaul. Replace with real cover art in assets/game.</desc>
+  <defs>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M50 0H0V50" fill="none" stroke="#1d242d" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="#0d1117"/>
+  <rect width="800" height="450" fill="url(#grid)"/>
+  <rect y="0" width="800" height="4" fill="#5ebfb0" opacity="0.7"/>
+  <text x="400" y="208" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="46" font-weight="700" letter-spacing="5" fill="#e9ebee">UNDEADOVERHAUL</text>
+  <text x="400" y="252" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15" letter-spacing="7" fill="#5ebfb0">PLACEHOLDER COVER</text>
+  <text x="400" y="292" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#98a2ad">replace with real art in /assets/game</text>
+</svg>

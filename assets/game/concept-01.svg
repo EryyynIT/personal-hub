@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="t d">
+  <title id="t">UndeadOverhaul placeholder concept art 01</title>
+  <desc id="d">Placeholder concept art. Replace with real art in assets/game.</desc>
+  <defs>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M50 0H0V50" fill="none" stroke="#241d18" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="640" height="360" fill="#151009"/>
+  <rect width="640" height="360" fill="url(#grid)"/>
+  <text x="320" y="176" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" letter-spacing="4" fill="#e9ebee">CONCEPT ART — 01</text>
+  <text x="320" y="206" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="2" fill="#a89a8a">replace with real artwork</text>
+</svg>
