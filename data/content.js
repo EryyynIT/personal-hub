@@ -115,10 +115,17 @@ const socials = [
   },
   {
     id: "telegram",
-    label: "Telegram",
+    label: "Telegram (Channel)",
     handle: "t.me/undeadoverhaul",
     url: "https://t.me/undeadoverhaul",
     note: "Official UndeadOverhaul development channel — devlogs and game updates (not a personal profile)."
+  },
+  {
+    id: "telegram-personal",
+    label: "Telegram (Personal)",
+    handle: "t.me/eprintln",
+    url: "https://t.me/eprintln",
+    note: "Direct line to me — best for quick questions and casual chat."
   }
 ];
 
