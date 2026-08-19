@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: replace with your GitHub Pages URL after publishing
+Sitemap: https://YOUR-USERNAME.github.io/YOUR-REPO/sitemap.xml
