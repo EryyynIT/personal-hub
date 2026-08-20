@@ -11,26 +11,40 @@ Built with plain **HTML + CSS + vanilla JS**. No frameworks, no build step, no b
 EryyynIT / Backend Developer · Go / Python
 │
 ├── About
+├── Work with me (contact CTA)
 ├── What I build (Backend / Infrastructure / Experiments)
 ├── Projects
-│   ├── UndeadOverhaul (game)
-│   ├── Async Payment Processing Service (FastAPI / RabbitMQ)
-│   ├── queue (Go)
-│   ├── MailingTGBot
-│   ├── go-exercises
-│   └── Tic-Tac-ToeAI
+│   ├── Selected work
+│   │   ├── UndeadOverhaul (flagship — game)
+│   │   ├── ADNova (commercial · AdTech)
+│   │   ├── Async Payment Processing Service (FastAPI / RabbitMQ)
+│   │   └── queue (Go)
+│   └── More experiments
+│       ├── MailingTGBot
+│       ├── go-exercises
+│       └── Tic-Tac-ToeAI
 ├── Currently building
 ├── Game (UndeadOverhaul)
 ├── Find me (GitHub · Boosty · X · TikTok · Telegram)
 └── Support
 ```
 
+## Languages
+
+- **English (primary)** — `index.html` at the site root (`https://eryyynit.github.io/personal-hub/`)
+- **Russian** — `ru/index.html` (`https://eryyynit.github.io/personal-hub/ru/`)
+
+Both pages share one content source — `data/content.js` holds EN + RU data, and `js/main.js`
+picks the active language from the `<html lang>` attribute. The compact `EN / RU` switcher
+in the header links between the two versions.
+
 ## Features
 
 - **Light / dark themes** — toggle, saved to `localStorage`, defaults to `prefers-color-scheme`
 - **Responsive** — 320px → 1440px+, mobile hamburger menu
-- **Data-driven UI** — build areas, projects, current work, team, socials, support and footer render from `data/content.js`
-- **SEO** — semantic HTML, Open Graph, Twitter card, favicon, sitemap, robots.txt
+- **Data-driven UI** — build areas, projects, current work, team, socials, support and footer render from `data/content.js` (EN + RU)
+- **Project hierarchy** — flagship card, featured grid, compact rows (commercial / selected work / experiments)
+- **SEO** — semantic HTML, Open Graph (per-language 1200×630 image), Twitter card, hreflang, favicon, sitemap, robots.txt
 - **Accessible** — skip link, aria labels, focus states, keyboard navigation, `prefers-reduced-motion`
 - **Fast** — zero external dependencies, inline SVG icons, local placeholder assets
 
@@ -38,17 +52,20 @@ EryyynIT / Backend Developer · Go / Python
 
 ```
 /
-├── index.html              # page structure, hero + About copy
+├── index.html              # English page (structure, hero + About copy)
+├── ru/
+│   └── index.html          # Russian page (full translation)
 ├── css/
 │   └── styles.css          # design tokens (colors) in :root / [data-theme="dark"]
 ├── js/
-│   └── main.js             # rendering, theme, menu, reveal, active nav
+│   └── main.js             # rendering (EN/RU), theme, menu, reveal, active nav
 ├── data/
-│   └── content.js          # ← edit content here (single source of truth)
+│   └── content.js          # ← edit content here (single source of truth, EN + RU)
 ├── assets/
 │   ├── game/               # UndeadOverhaul media (placeholders now)
 │   ├── projects/           # project card covers (placeholders now)
-│   ├── images/             # og-cover placeholder
+│   ├── og/                 # Open Graph images (text-generated SVG + PNG render)
+│   ├── images/             # legacy og-cover placeholder
 │   ├── profile/            # reserved
 │   └── icons/              # reserved
 ├── favicon.svg
@@ -59,54 +76,21 @@ EryyynIT / Backend Developer · Go / Python
 
 ## Edit content
 
-| What                | Where                                              |
-| ------------------- | -------------------------------------------------- |
-| Identity, build areas, projects, current work, team, socials, support, footer | `data/content.js` |
-| Hero headline, About text, page structure | `index.html` |
-| Colors, spacing, dark/light tokens | `css/styles.css` |
+Everything editable lives in `data/content.js` — identity, build areas, projects, current
+work, game info, team, socials, support, footer and UI labels, in **both** languages:
 
-Add a new project by appending an object to the `projects` array in `data/content.js` — the card renders automatically.
+- `CONTENT_EN` — English (primary)
+- `CONTENT_RU` — Russian
 
-## Placeholders to replace before publishing
+Add a project in both blocks and it appears on both pages automatically. Relative asset
+paths (`assets/...`) are resolved against the page location by `main.js`, so they work both
+at the site root and in the `/ru/` subfolder.
 
-- `data/content.js` → `game.release`, `game.platforms`, `game.storeUrl` (only when confirmed — don't invent)
-- `assets/projects/*.svg` → real project screenshots (webp recommended)
-- `assets/game/*.svg` → real screenshots / concept art (webp recommended)
-- `index.html` → `og:image` (real 1200x630 cover)
-- `favicon.svg` → optional
+## Test
 
-## Run locally
-
-```bash
-# from the project root
-python3 -m http.server 8080
-# open http://localhost:8080
 ```
-
-No build step. Opening `index.html` directly also works (all scripts are plain, non-module).
-
-## Smoke test
-
-```bash
 node test/smoke.test.js
 ```
 
-Runs `data/content.js` + `js/main.js` against a DOM shim and verifies that all sections render, the brand is consistent (no old identity leakage), and no relative URLs are broken.
-
-## Publish on GitHub Pages
-
-The repo ships with `.github/workflows/pages.yml`. Enable it via
-**Settings → Pages → Source: "GitHub Actions"**. After that, every push to `main` deploys automatically.
-
-## Roadmap (future, not implemented)
-
-- Blog / game devlog / changelog
-- itch.io / Steam links (fields already reserved in `GAME_INFO`)
-- Discord, YouTube, Twitch
-- Newsletter / contact
-- Real game media (screenshots, trailer)
-- GitHub repository cards (live from the API)
-
----
-
-Built by hand — no frameworks, no trackers, no nonsense.
+Runs `data/content.js` + `js/main.js` against a minimal DOM shim for both languages and
+verifies that all sections render expected content with no broken relative URLs.
