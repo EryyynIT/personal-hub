@@ -794,19 +794,6 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .footer-link svg { width: 15px; height: 15px; }
 .footer-link-muted { opacity: 0.5; cursor: default; }
 
-/* ---------- Noscript ---------- */
-.noscript-note {
-  padding: 0.9rem 1.2rem;
-  margin: 1rem auto;
-  max-width: var(--container);
-  width: fit-content;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--surface);
-  color: var(--text-2);
-  font-size: 0.9rem;
-}
-
 /* ---------- Reveal-on-scroll ----------
    Elements get hidden only after main.js adds .js to <html>,
    so nothing is ever hidden when JavaScript is unavailable.
