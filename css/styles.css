@@ -689,6 +689,25 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .about-text p { max-width: 62ch; }
 .about-text p + p { margin-top: 1rem; }
 
+/* ---------- Work with me ---------- */
+.contact-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+  padding: clamp(1.6rem, 4vw, 2.5rem);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, var(--accent-soft), transparent 55%),
+    var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.contact-text h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; letter-spacing: -0.02em; }
+.contact-text p { margin-top: var(--space-2); color: var(--text-2); max-width: 54ch; line-height: 1.55; }
+.contact-band .btn { flex: none; }
 
 /* ---------- Socials ---------- */
 .section-socials { background: var(--surface-2); border-block: 1px solid var(--border); }
@@ -837,6 +856,8 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   .game-gallery { grid-template-columns: 1fr; }
   .hero-cta .btn { width: 100%; }
   .social-row { gap: 0.85rem; padding: 0.9rem 1rem; }
+  .contact-band { flex-direction: column; align-items: stretch; }
+  .contact-band .btn { width: 100%; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
 }
 
