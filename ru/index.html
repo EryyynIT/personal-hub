@@ -23,6 +23,35 @@
     })();
   </script>
 
+  <!-- ===== Language bootstrap: open the Russian version automatically when the
+         browser's preferred language is Russian and no explicit choice was made
+         yet. An explicit EN/RU choice is saved to localStorage by main.js and
+         always wins over auto-detection. ===== -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('lang');
+        var page = (document.documentElement.getAttribute('lang') || 'en').toLowerCase();
+        var preferred = String(
+          (navigator.languages && navigator.languages.length && navigator.languages[0]) ||
+          navigator.language || navigator.userLanguage || 'en'
+        ).toLowerCase();
+        var target = null;
+        if (saved === 'en' || saved === 'ru') {
+          // Explicit choice via the EN/RU switcher always wins.
+          if (saved !== page) target = saved;
+        } else if (page === 'en' && preferred.indexOf('ru') === 0) {
+          // No explicit choice yet: honor a Russian-preferred browser (EN -> RU).
+          target = 'ru';
+        }
+        if (target === 'ru' && page === 'en') location.replace('ru/');
+        else if (target === 'en' && page === 'ru') location.replace('../');
+      } catch (e) {
+        /* localStorage / navigator unavailable — keep the current page */
+      }
+    })();
+  </script>
+
   <!-- ===== SEO: canonical + hreflang =================================== -->
   <link rel="canonical" href="https://eryyynit.github.io/personal-hub/ru/">
   <link rel="alternate" hreflang="en" href="https://eryyynit.github.io/personal-hub/">

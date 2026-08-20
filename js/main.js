@@ -92,6 +92,21 @@
     setTheme(root.getAttribute('data-theme') || 'dark');
   }
 
+  /* ---------- Language switcher: remember explicit choice ----------
+     Auto-redirect (head bootstrap) only applies before a first explicit
+     choice; once the user picks a language manually, it is stored in
+     localStorage and takes precedence over auto-detection. */
+  function initLanguageSwitch() {
+    $$('.lang-link').forEach(function (a) {
+      a.addEventListener('click', function () {
+        var target = (a.getAttribute('lang') || '').toLowerCase();
+        if (target === 'en' || target === 'ru') {
+          try { localStorage.setItem('lang', target); } catch (e) { /* private mode */ }
+        }
+      });
+    });
+  }
+
   /* ---------- Mobile menu ---------- */
   var menuToggle = $('#menu-toggle');
   var navLinks = $('#nav-links');
@@ -505,4 +520,5 @@
   renderFooter();
   initReveal();
   initActiveNav();
+  initLanguageSwitch();
 })();
