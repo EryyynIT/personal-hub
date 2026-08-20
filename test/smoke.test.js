@@ -6,6 +6,7 @@ const vm = require('vm');
 
 function makeEl(id) {
   const attrs = {};
+  const listeners = {};
   return {
     id,
     innerHTML: '',
@@ -14,7 +15,8 @@ function makeEl(id) {
     classList: { add() {}, remove() {}, toggle() {}, contains() { return false; } },
     setAttribute(k, v) { attrs[k] = v; },
     getAttribute(k) { return attrs[k] || null; },
-    addEventListener() {},
+    addEventListener(type, fn) { (listeners[type] = listeners[type] || []).push(fn); },
+    fire(type, ev) { (listeners[type] || []).forEach((fn) => fn(ev || {})); },
     querySelector() { return null; },
     querySelectorAll() { return []; },
     closest() { return null; },
@@ -32,6 +34,12 @@ const ELEMENT_IDS = [
 function run(lang) {
   const registry = {};
   ELEMENT_IDS.forEach(id => { registry[id] = makeEl(id); });
+
+  // The EN/RU switcher link (points to the other language version).
+  const langLink = makeEl('lang-link');
+  langLink.setAttribute('lang', lang === 'ru' ? 'en' : 'ru');
+  langLink.setAttribute('href', lang === 'ru' ? '../' : 'ru/');
+  const storage = {};
 
   const rootEl = makeEl('html');
   rootEl.setAttribute('data-theme', 'dark');
@@ -54,10 +62,16 @@ function run(lang) {
         if (sel.startsWith('#')) return registry[sel.slice(1)] || null;
         return null; // meta[name="theme-color"] etc.
       },
-      querySelectorAll() { return []; },
+      querySelectorAll(sel) {
+        if (sel === '.lang-link') return [langLink];
+        return [];
+      },
       addEventListener() {}
     },
-    localStorage: { getItem: () => null, setItem() {} },
+    localStorage: {
+      getItem: (k) => (k in storage ? storage[k] : null),
+      setItem(k, v) { storage[k] = v; }
+    },
     console
   };
   sandbox.window.document = sandbox.document;
@@ -177,6 +191,11 @@ function run(lang) {
   // --- External URLs sanity (no placeholder text leaking into links) ---
   const badPlaceholders = refs.filter(u => /YOUR-|PUT_|undefined/i.test(u));
   results.placeholderLeakInLinks = badPlaceholders;
+
+  // --- Language switcher: clicking EN/RU remembers the explicit choice,
+  //     which the head bootstrap uses to override auto-detection. ---
+  langLink.fire('click');
+  results.switcherRemembersChoice = storage.lang === (lang === 'ru' ? 'en' : 'ru');
 
   return results;
 }
