@@ -73,6 +73,11 @@
       </ul>
 
       <div class="nav-actions">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <span class="lang-current" aria-current="true">EN</span>
+          <span class="lang-sep" aria-hidden="true">/</span>
+          <a class="lang-link" href="ru/" lang="ru" hreflang="ru">RU</a>
+        </div>
         <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme">
           <svg class="icon icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
           <svg class="icon icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -210,8 +215,8 @@
           </div>
           <aside class="game-info reveal">
             <p class="game-status"><span class="status-dot" aria-hidden="true"></span><span id="game-status-text">In development</span></p>
-            <!-- Static fallback: data/content.js (GAME_INFO.description) is the source of truth. -->
-            <p class="game-desc" id="game-desc">UndeadOverhaul is a two-person indie game project. EryyynIT handles the code and engineering, the artist owns the visual development. We're building it in the open — progress and devlogs land on the official Telegram channel.</p>
+            <!-- Static fallback: data/content.js (game.description) is the source of truth. -->
+            <p class="game-desc" id="game-desc">UndeadOverhaul is a two-person indie game project. EryyynIT handles the code and engineering, the artist handles the visual side. We're building it in the open — progress and devlogs land on the official Telegram channel.</p>
             <ul class="game-facts" id="game-facts"><!-- facts rendered from data/content.js --></ul>
             <div class="game-cta">
               <a class="btn btn-primary" href="#team">Meet the team</a>

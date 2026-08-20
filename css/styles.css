@@ -222,6 +222,25 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 
 .nav-actions { display: flex; align-items: center; gap: var(--space-2); }
 
+/* Language switcher — minimal EN | RU */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+.lang-link {
+  color: var(--text-2);
+  font-weight: 600;
+  padding: 0.4rem 0.32rem;
+  border-radius: 7px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.lang-link:hover { color: var(--accent); background: var(--accent-soft); text-decoration: none; }
+.lang-current { color: var(--accent); font-weight: 700; padding: 0.4rem 0.32rem; }
+.lang-sep { color: var(--border-strong); user-select: none; }
 
 .icon-btn {
   display: inline-flex;

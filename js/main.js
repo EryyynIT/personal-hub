@@ -2,15 +2,36 @@
    Personal hub — vanilla JS
    ---------------------------------------------------------------------
    Renders projects, team, socials, support and footer from
-   data/content.js. Handles theme switching, mobile menu, header state,
-   active nav highlighting and reveal-on-scroll. No dependencies.
+   data/content.js (EN or RU, picked from the <html lang> attribute).
+   Handles theme switching, mobile menu, header state, active nav
+   highlighting and reveal-on-scroll. No dependencies.
    ===================================================================== */
 
 (function () {
   'use strict';
 
-  var CONTENT = window.SITE_CONTENT || {};
   var root = document.documentElement;
+
+  /* ---------- Language detection ---------- */
+  var langAttr = (root.getAttribute('lang') || 'en').toLowerCase();
+  var lang = langAttr.indexOf('ru') === 0 ? 'ru' : 'en';
+
+  var L10N = window.SITE_CONTENT || {};
+  var CONTENT = L10N[lang] || L10N.en || {};
+  var labels = CONTENT.labels || {};
+
+  /* ---------- Asset base path ----------
+     At the site root assets live next to the page. Inside a language
+     subfolder (/ru/, /en/) they live one level up. */
+  function assetBase() {
+    try {
+      var path = window.location.pathname || '';
+      if (/\/(ru|en)\/(index\.html?)?$/i.test(path)) return '../';
+    } catch (e) { /* location unavailable (e.g. tests) */ }
+    return '';
+  }
+  var BASE = assetBase();
+  function asset(src) { return BASE + String(src || ''); }
 
   // Mark that JS is active: .js .reveal rules only apply from now on,
   // so content is never hidden when JavaScript is unavailable.
@@ -128,16 +149,16 @@
     var media =
       '<' + (hasLink ? 'a' : 'div') + ' class="project-media"' +
       (hasLink ? ' href="' + esc(href) + '"' + rel + ' tabindex="-1" aria-hidden="true"' : '') + '>' +
-        '<img src="' + esc(p.image) + '" alt="' + esc(p.imageAlt || '') + '" loading="lazy" width="640" height="360">' +
+        '<img src="' + esc(asset(p.image)) + '" alt="' + esc(p.imageAlt || '') + '" loading="lazy" width="640" height="360">' +
         '<span class="project-type">' + esc(p.type || '') + '</span>' +
       '</' + (hasLink ? 'a' : 'div') + '>';
 
     var link = '';
     if (hasLink) {
       link = '<a class="project-link" href="' + esc(href) + '"' + rel + '>' +
-        esc(p.urlLabel || 'View project') + arrow + '</a>';
+        esc(p.urlLabel || labels.viewProject || 'View project') + arrow + '</a>';
     } else if (p.commercial) {
-      link = '<p class="commercial-note">Commercial project — details on request.</p>';
+      link = '<p class="commercial-note">' + esc(labels.commercialNote || 'Commercial project.') + '</p>';
     }
 
     return (
@@ -166,7 +187,7 @@
     var arrow = external ? icon('external') : '<span class="arrow" aria-hidden="true">→</span>';
     var link = hasLink
       ? '<a class="compact-link" href="' + esc(href) + '"' + rel + '>' +
-        esc(p.urlLabel || 'View project') + arrow + '</a>'
+        esc(p.urlLabel || labels.viewProject || 'View project') + arrow + '</a>'
       : '';
 
     return (
@@ -197,13 +218,13 @@
 
     var html = '';
     if (featuredCards.length) {
-      html += '<h3 class="group-title">Selected work</h3>' +
+      html += '<h3 class="group-title">' + esc(labels.projectsFeatured || 'Selected work') + '</h3>' +
               '<div class="projects-featured">' +
               featuredCards.map(renderFeaturedCard).join('') +
               '</div>';
     }
     if (compact.length) {
-      html += '<h3 class="group-title">More experiments</h3>' +
+      html += '<h3 class="group-title">' + esc(labels.projectsMore || 'More experiments') + '</h3>' +
               '<div class="projects-compact">' +
               compact.map(renderCompactRow).join('') +
               '</div>';
@@ -217,8 +238,9 @@
     if (!note) return;
     var gh = CONTENT.github;
     if (gh) {
-      note.innerHTML = 'More projects are in progress — follow the repos ' +
-        '<a href="' + esc(gh) + '" target="_blank" rel="noopener noreferrer">on GitHub</a>.';
+      note.innerHTML = esc(labels.projectsNote || 'More projects are in progress') + ' ' +
+        '<a href="' + esc(gh) + '" target="_blank" rel="noopener noreferrer">' +
+        esc(labels.projectsOnGithub || 'on GitHub') + '</a>.';
     }
   }
 
@@ -229,9 +251,7 @@
     var list = CONTENT.buildAreas || [];
 
     grid.innerHTML = list.map(function (a) {
-      var tech = (a.tech || []).map(function (t) {
-        return '<span class="chip">' + esc(t) + '</span>';
-      }).join('');
+      var tech = (a.tech || []).map(chip).join('');
       return (
         '<article class="card build-card reveal">' +
           '<h3 class="build-title">' + esc(a.title) + '</h3>' +
@@ -252,7 +272,7 @@
       var link = l.url
         ? '<a class="term-link" href="' + esc(l.url) + '"' +
           (isExternal(l.url) ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' +
-          esc(l.label || 'more') + '</a>'
+          esc(l.label || labels.moreLink || 'more') + '</a>'
         : '';
       return (
         '<p class="term-line" role="listitem">' +
@@ -277,10 +297,10 @@
     var facts = $('#game-facts');
     if (facts) {
       var rows = [
-        { k: 'Status', v: info.status },
-        { k: 'Team', v: '2 people' },
-        { k: 'Release', v: info.release },
-        { k: 'Platforms', v: info.platforms && info.platforms.length ? info.platforms.join(' / ') : null }
+        { k: labels.factStatus || 'Status', v: info.status },
+        { k: labels.factTeam || 'Team', v: labels.teamSize || '2 people' },
+        { k: labels.factRelease || 'Release', v: info.release },
+        { k: labels.factPlatforms || 'Platforms', v: info.platforms && info.platforms.length ? info.platforms.join(' / ') : null }
       ].filter(function (r) { return r.v; });
       facts.innerHTML = rows.map(function (r) {
         return '<li><span class="fact-label">' + esc(r.k) + '</span><span>' + esc(r.v) + '</span></li>';
@@ -295,7 +315,7 @@
         num = num < 10 ? '0' + num : String(num);
         return (
           '<figure class="game-shot">' +
-            '<img src="' + esc(g.src) + '" alt="' + esc(g.alt) + '" loading="lazy" width="640" height="360">' +
+            '<img src="' + esc(asset(g.src)) + '" alt="' + esc(g.alt) + '" loading="lazy" width="640" height="360">' +
             '<figcaption>' + esc(g.label) + ' — ' + num + '</figcaption>' +
           '</figure>'
         );
@@ -371,8 +391,8 @@
 
     var meUrl = CONTENT.boosty;
     var meBtn = meUrl
-      ? '<a class="btn btn-primary btn-block" href="' + esc(meUrl) + '" target="_blank" rel="noopener noreferrer">' + icon('boosty') + '<span>Support on Boosty</span>' + icon('external') + '</a>'
-      : '<button class="btn btn-primary btn-block" type="button" disabled title="Boosty link not set yet — add it in data/content.js (boosty)">' + icon('boosty') + '<span>Support on Boosty — coming soon</span></button>';
+      ? '<a class="btn btn-primary btn-block" href="' + esc(meUrl) + '" target="_blank" rel="noopener noreferrer">' + icon('boosty') + '<span>' + esc(labels.supportOnBoosty || 'Support on Boosty') + '</span>' + icon('external') + '</a>'
+      : '<button class="btn btn-primary btn-block" type="button" disabled title="' + esc(labels.supportBtnTitle || '') + '">' + icon('boosty') + '<span>' + esc(labels.supportComingSoon || 'Support on Boosty — coming soon') + '</span></button>';
 
     var artistUrl = sp.artist && sp.artist.url;
     grid.innerHTML =
@@ -385,7 +405,7 @@
         '<h3 class="support-title">' + esc((sp.artist && sp.artist.label) || 'Support the artist') + '</h3>' +
         '<p class="support-desc">' + esc((sp.artist && sp.artist.description) || '') + '</p>' +
         (artistUrl
-          ? '<a class="btn btn-ghost btn-block" href="' + esc(artistUrl) + '" target="_blank" rel="noopener noreferrer">' + icon('boosty') + '<span>Support on Boosty</span>' + icon('external') + '</a>'
+          ? '<a class="btn btn-ghost btn-block" href="' + esc(artistUrl) + '" target="_blank" rel="noopener noreferrer">' + icon('boosty') + '<span>' + esc(labels.supportOnBoosty || 'Support on Boosty') + '</span>' + icon('external') + '</a>'
           : '') +
       '</div>';
   }
