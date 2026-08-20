@@ -110,40 +110,105 @@
   onScroll();
 
   /* ---------- Render: projects ---------- */
+  function chip(t) {
+    return '<span class="chip">' + esc(t) + '</span>';
+  }
+
+  function renderFeaturedCard(p) {
+    var href = p.url || '#';
+    var hasLink = href !== '#';
+    var external = isExternal(href);
+    var rel = external ? ' target="_blank" rel="noopener noreferrer"' : '';
+    var tech = (p.technologies || []).map(chip).join('');
+    var arrow = external ? icon('external') : '<span class="arrow" aria-hidden="true">→</span>';
+    var cls = 'card project-card reveal';
+    if (p.tier === 'flagship') cls += ' project-card--flagship';
+    if (p.commercial) cls += ' commercial';
+
+    var media =
+      '<' + (hasLink ? 'a' : 'div') + ' class="project-media"' +
+      (hasLink ? ' href="' + esc(href) + '"' + rel + ' tabindex="-1" aria-hidden="true"' : '') + '>' +
+        '<img src="' + esc(p.image) + '" alt="' + esc(p.imageAlt || '') + '" loading="lazy" width="640" height="360">' +
+        '<span class="project-type">' + esc(p.type || '') + '</span>' +
+      '</' + (hasLink ? 'a' : 'div') + '>';
+
+    var link = '';
+    if (hasLink) {
+      link = '<a class="project-link" href="' + esc(href) + '"' + rel + '>' +
+        esc(p.urlLabel || 'View project') + arrow + '</a>';
+    } else if (p.commercial) {
+      link = '<p class="commercial-note">Commercial project — details on request.</p>';
+    }
+
+    return (
+      '<article class="' + cls + '">' +
+        media +
+        '<div class="project-body">' +
+          '<div class="project-title-row">' +
+            '<h3 class="project-title">' + esc(p.title) + '</h3>' +
+            (p.status ? '<span class="status-badge' + (p.commercial ? ' commercial' : '') + '">' + esc(p.status) + '</span>' : '') +
+          '</div>' +
+          '<p class="project-desc">' + esc(p.description) + '</p>' +
+          (p.why ? '<p class="project-why">' + esc(p.why) + '</p>' : '') +
+          (tech ? '<div class="project-tech">' + tech + '</div>' : '') +
+          link +
+        '</div>' +
+      '</article>'
+    );
+  }
+
+  function renderCompactRow(p) {
+    var href = p.url || '#';
+    var hasLink = href !== '#';
+    var external = isExternal(href);
+    var rel = external ? ' target="_blank" rel="noopener noreferrer"' : '';
+    var tech = (p.technologies || []).map(chip).join('');
+    var arrow = external ? icon('external') : '<span class="arrow" aria-hidden="true">→</span>';
+    var link = hasLink
+      ? '<a class="compact-link" href="' + esc(href) + '"' + rel + '>' +
+        esc(p.urlLabel || 'View project') + arrow + '</a>'
+      : '';
+
+    return (
+      '<article class="compact-row reveal">' +
+        '<div class="compact-main">' +
+          '<div class="compact-title-row">' +
+            '<h3 class="compact-title">' + esc(p.title) + '</h3>' +
+            (p.status ? '<span class="status-badge">' + esc(p.status) + '</span>' : '') +
+          '</div>' +
+          '<p class="compact-desc">' + esc(p.description) + '</p>' +
+          (tech ? '<div class="compact-meta">' + tech + '</div>' : '') +
+        '</div>' +
+        link +
+      '</article>'
+    );
+  }
+
   function renderProjects() {
     var grid = $('#projects-grid');
     if (!grid) return;
     var list = CONTENT.projects || [];
     if (!list.length) return;
 
-    grid.innerHTML = list.map(function (p) {
-      var href = p.url || '#';
-      var external = isExternal(href);
-      var rel = external ? ' target="_blank" rel="noopener noreferrer"' : '';
-      var tech = (p.technologies || []).map(function (t) {
-        return '<span class="chip">' + esc(t) + '</span>';
-      }).join('');
-      var arrow = external ? icon('external') : '<span class="arrow" aria-hidden="true">→</span>';
+    var flagship = list.filter(function (p) { return p.tier === 'flagship'; });
+    var featured = list.filter(function (p) { return p.tier === 'featured'; });
+    var compact = list.filter(function (p) { return p.tier !== 'flagship' && p.tier !== 'featured'; });
+    var featuredCards = flagship.concat(featured);
 
-      return (
-        '<article class="card project-card reveal">' +
-          '<a class="project-media" href="' + esc(href) + '"' + rel + ' tabindex="-1" aria-hidden="true">' +
-            '<img src="' + esc(p.image) + '" alt="' + esc(p.imageAlt || '') + '" loading="lazy" width="640" height="360">' +
-            '<span class="project-type">' + esc(p.type || '') + '</span>' +
-          '</a>' +
-          '<div class="project-body">' +
-            '<div class="project-title-row">' +
-              '<h3 class="project-title">' + esc(p.title) + '</h3>' +
-              (p.status ? '<span class="status-badge">' + esc(p.status) + '</span>' : '') +
-            '</div>' +
-            '<p class="project-desc">' + esc(p.description) + '</p>' +
-            (p.why ? '<p class="project-why">' + esc(p.why) + '</p>' : '') +
-            (tech ? '<div class="project-tech">' + tech + '</div>' : '') +
-            (href !== '#' ? '<a class="project-link" href="' + esc(href) + '"' + rel + '>' + esc(p.urlLabel || 'View project') + arrow + '</a>' : '') +
-          '</div>' +
-        '</article>'
-      );
-    }).join('');
+    var html = '';
+    if (featuredCards.length) {
+      html += '<h3 class="group-title">Selected work</h3>' +
+              '<div class="projects-featured">' +
+              featuredCards.map(renderFeaturedCard).join('') +
+              '</div>';
+    }
+    if (compact.length) {
+      html += '<h3 class="group-title">More experiments</h3>' +
+              '<div class="projects-compact">' +
+              compact.map(renderCompactRow).join('') +
+              '</div>';
+    }
+    grid.innerHTML = html;
   }
 
   /* ---------- Render: projects note ---------- */

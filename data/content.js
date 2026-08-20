@@ -83,6 +83,7 @@ const projects = [
     title: "UndeadOverhaul",
     type: "GameDev",
     status: "In development",
+    tier: "flagship",
     description:
       "An indie game project in active development, built as a two-person team — " +
       "code and engineering by EryyynIT, art and visual development by the artist.",
@@ -94,9 +95,25 @@ const projects = [
     imageAlt: "UndeadOverhaul — placeholder cover art"
   },
   {
+    title: "ADNova",
+    type: "Commercial · AdTech",
+    status: "Commercial",
+    tier: "featured",
+    commercial: true,
+    description:
+      "Commercial product in the AdTech / CPA space. My work here is backend and product " +
+      "engineering — production development, not a study prototype.",
+    technologies: [],
+    why: "Commercial experience — production systems instead of study projects.",
+    url: null,
+    image: "assets/projects/adnova.svg",
+    imageAlt: "ADNova — cover"
+  },
+  {
     title: "Async Payment Processing Service",
     type: "Backend · Python",
     status: "Experiment",
+    tier: "featured",
     description:
       "An event-driven payment microservice built with FastAPI and RabbitMQ — outbox pattern, " +
       "dead letter queue, idempotency and webhook notifications. A deep-dive into reliable " +
@@ -112,6 +129,7 @@ const projects = [
     title: "queue",
     type: "Backend · Go",
     status: "Experiment",
+    tier: "featured",
     description:
       "A small in-memory queue broker written in Go, stdlib only, exposed over an HTTP API " +
       "with two endpoints. Built to understand FIFO semantics and concurrency without a " +
@@ -127,6 +145,7 @@ const projects = [
     title: "MailingTGBot",
     type: "Bot · Python",
     status: "Tool",
+    tier: "compact",
     description:
       "A Telegram broadcasting bot in aiogram v3 — admin, sub-admin and moderator management, " +
       "plus a mailing system that sends messages to users.",
@@ -141,6 +160,7 @@ const projects = [
     title: "go-exercises",
     type: "Learning · Go",
     status: "Ongoing",
+    tier: "compact",
     description:
       "Self-made Go exercises — goroutines, channels, workers, select, cancellation, error " +
       "handling and project layout — each one a small task with a written solution.",
@@ -155,6 +175,7 @@ const projects = [
     title: "Tic-Tac-ToeAI",
     type: "Game · Python",
     status: "Prototype",
+    tier: "compact",
     description:
       "A Pygame tic-tac-toe you can play against an AI. An early experiment — the one that " +
       "started the habit of building small games.",
