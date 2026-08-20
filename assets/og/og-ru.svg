@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="t d">
+  <title id="t">EryyynIT — бэкенд-разработчик · Go / Python</title>
+  <desc id="d">Open Graph cover for the personal hub of EryyynIT.</desc>
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#1d242d" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="glow" cx="0.5" cy="0" r="0.9">
+      <stop offset="0" stop-color="#5ebfb0" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#5ebfb0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accentLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5ebfb0"/>
+      <stop offset="1" stop-color="#5ebfb0" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0b0e12"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect y="0" width="1200" height="5" fill="#5ebfb0" opacity="0.85"/>
+
+  <!-- brand -->
+  <text x="70" y="96" font-family="DejaVu Sans Mono, monospace" font-size="22" font-weight="700" letter-spacing="6" fill="#e9ebee">ERYYYNIT</text>
+  <rect x="222" y="70" width="10" height="26" fill="#5ebfb0"/>
+
+  <!-- headline -->
+  <text x="70" y="300" font-family="DejaVu Sans, sans-serif" font-size="62" font-weight="700" letter-spacing="-1" fill="#e9ebee">Бэкенд-разработчик</text>
+  <text x="70" y="376" font-family="DejaVu Sans Mono, monospace" font-size="26" letter-spacing="8" fill="#5ebfb0">GO · PYTHON</text>
+
+  <line x1="70" y1="420" x2="520" y2="420" stroke="#232a33" stroke-width="2"/>
+
+  <!-- sub -->
+  <text x="70" y="472" font-family="DejaVu Sans, sans-serif" font-size="30" font-weight="400" fill="#98a2ad">Личный хаб — софт, игры, эксперименты</text>
+  <text x="70" y="516" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="400" fill="#565f6b">UndeadOverhaul — инди-игра в разработке</text>
+
+  <!-- footer -->
+  <text x="70" y="576" font-family="DejaVu Sans Mono, monospace" font-size="15" letter-spacing="3" fill="#565f6b">ERYYYNIT.GITHUB.IO/PERSONAL-HUB</text>
+</svg>
