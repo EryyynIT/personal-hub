@@ -38,10 +38,11 @@ Both pages share one content source — `data/content.js` holds EN + RU data, an
 picks the active language from the `<html lang>` attribute. The compact `EN / RU` switcher
 in the header links between the two versions.
 
-**Automatic language selection** — on the first visit the English page checks the browser's
-preferred language (`navigator.language`) and opens the Russian version automatically for
-Russian-speaking users (EN → RU). An explicit choice made via the `EN / RU` switcher is
-remembered in `localStorage` and always takes precedence over auto-detection.
+**Automatic language selection** — the site matches the visitor's browser language on the
+first visit: Russian-speaking visitors are sent from `/` to `/ru/`, and non-Russian-speaking
+visitors who land on `/ru/` (for example via a link shared from the Russian version) are sent
+back to `/`. An explicit choice made via the `EN / RU` switcher is remembered in `localStorage`
+and always takes precedence over auto-detection.
 
 ## Features
 

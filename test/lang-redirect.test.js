@@ -2,9 +2,9 @@
    and ru/index.html.
 
    Behavior under test:
-   - Without an explicit choice, an EN page auto-redirects to the RU version
-     only when the browser's preferred language is Russian (EN -> RU).
-   - The RU page never auto-redirects on its own.
+   - Without an explicit choice, the page matches the browser's preferred
+     language: EN -> RU for Russian-preferring browsers, RU -> EN for everyone
+     else (so shared /ru/ links never trap non-Russian visitors).
    - An explicit choice saved by the EN/RU switcher (localStorage 'lang')
      always wins and redirects to the chosen version regardless of the
      browser language.
@@ -82,10 +82,14 @@ check('en page, fr-preferred browser -> stay', enScript, 'en',
 check('en page, ru only second in list -> stay (first preference wins)',
   enScript, 'en', { languages: ['en-US', 'ru'], language: 'en-US' }, []);
 
-/* --- The RU page never auto-redirects without an explicit choice --- */
+/* --- No explicit choice: the RU page sends non-Russian visitors to EN --- */
 check('ru page, ru-preferred browser -> stay', ruScript, 'ru', { language: 'ru-RU' }, []);
-check('ru page, en-preferred browser -> stay (feature is EN -> RU)', ruScript, 'ru',
-  { language: 'en-US' }, []);
+check('ru page, en-preferred browser -> redirect to ../', ruScript, 'ru',
+  { language: 'en-US' }, ['../']);
+check('ru page, fr-preferred browser -> redirect to ../', ruScript, 'ru',
+  { language: 'fr-FR' }, ['../']);
+check('ru page, unknown browser language -> redirect to ../ (falls back to en)',
+  ruScript, 'ru', { languages: [], language: undefined }, ['../']);
 
 /* --- Explicit choice stored by the switcher always wins --- */
 check('en page, saved=en, ru-preferred browser -> stay', enScript, 'en',

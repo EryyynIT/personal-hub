@@ -23,10 +23,10 @@
     })();
   </script>
 
-  <!-- ===== Language bootstrap: open the Russian version automatically when the
-         browser's preferred language is Russian and no explicit choice was made
-         yet. An explicit EN/RU choice is saved to localStorage by main.js and
-         always wins over auto-detection. ===== -->
+  <!-- ===== Language bootstrap: match the visitor's browser language when no
+         explicit choice was made yet: Russian-preferring visitors get the RU
+         page, everyone else the EN page. An explicit EN/RU choice is saved to
+         localStorage by main.js and always wins over auto-detection. ===== -->
   <script>
     (function () {
       try {
@@ -36,13 +36,17 @@
           (navigator.languages && navigator.languages.length && navigator.languages[0]) ||
           navigator.language || navigator.userLanguage || 'en'
         ).toLowerCase();
+        var prefersRu = preferred.indexOf('ru') === 0;
         var target = null;
         if (saved === 'en' || saved === 'ru') {
-          // Explicit choice via the EN/RU switcher always wins.
+          // An explicit choice via the EN/RU switcher always wins.
           if (saved !== page) target = saved;
-        } else if (page === 'en' && preferred.indexOf('ru') === 0) {
-          // No explicit choice yet: honor a Russian-preferred browser (EN -> RU).
+        } else if (prefersRu && page === 'en') {
+          // No explicit choice yet: a Russian-preferring browser gets the RU page.
           target = 'ru';
+        } else if (!prefersRu && page === 'ru') {
+          // No explicit choice yet: a non-Russian-preferring browser gets the EN page.
+          target = 'en';
         }
         if (target === 'ru' && page === 'en') location.replace('ru/');
         else if (target === 'en' && page === 'ru') location.replace('../');
