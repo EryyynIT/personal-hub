@@ -73,9 +73,9 @@ const allContent = [
 // --- Identity: EryyynIT everywhere, old identities nowhere ---
 results.brandUsed = /EryyynIT/.test(allContent) && /github\.com\/EryyynIT/.test(allContent);
 results.noOldHandle = !/Dexter2038|dexter2038/.test(allContent);
-// X's existing handle is @Eryyyn_IT (a real external account) — strip it before checking for brand misspellings.
-const contentWithoutXHandle = allContent.replace(/x\.com\/Eryyyn_IT|@Eryyyn_IT/g, '');
-results.noMisspelledBrand = !/EryynIT|Eryyn\b|Erynn|Eryyyn_IT|EryyynDev|MichaelIT/i.test(contentWithoutXHandle);
+// X's existing handle is @EryyynIT (a real external account) — strip it before checking for brand misspellings.
+const contentWithoutXHandle = allContent.replace(/x\.com\/EryyynIT|@EryyynIT/g, '');
+results.noMisspelledBrand = !/EryynIT|Eryyn\b|Erynn|EryyynDev|MichaelIT/i.test(contentWithoutXHandle);
 results.noOldTitle = !/Michael — Developer/.test(allContent);
 
 // --- Build areas ---
@@ -106,14 +106,14 @@ results.buildingRendered = building.includes('UndeadOverhaul') && building.inclu
 const team = registry['team-grid'].innerHTML;
 results.teamRendered = team.includes('Developer / Programmer') && team.includes('Artist / Visual Development');
 results.artistLinks = team.includes('https://x.com/Gemaglobin1') && team.includes('https://boosty.to/manevr');
-results.devLinks = team.includes('https://x.com/Eryyyn_IT') && team.includes('https://www.tiktok.com/@barbaris.yt');
+results.devLinks = team.includes('https://x.com/EryyynIT') && team.includes('https://www.tiktok.com/@barbaris.yt');
 
 // --- Socials (Find me) ---
 const socials = registry['social-list'].innerHTML;
 results.socialsRendered =
   socials.includes('https://github.com/EryyynIT') &&
   socials.includes('https://boosty.to/eryyynit') &&
-  socials.includes('https://x.com/Eryyyn_IT') &&
+  socials.includes('https://x.com/EryyynIT') &&
   socials.includes('https://www.tiktok.com/@barbaris.yt') &&
   socials.includes('https://t.me/undeadoverhaul');
 
@@ -130,7 +130,7 @@ results.galleryRendered = gallery.includes('screenshot-01.svg') && gallery.inclu
 
 // --- Footer ---
 const footer = registry['footer-links'].innerHTML;
-results.footerX = footer.includes('https://x.com/Eryyyn_IT');
+results.footerX = footer.includes('https://x.com/EryyynIT');
 results.footerGithub = footer.includes('https://github.com/EryyynIT') && !footer.includes('footer-link-muted'); // github configured -> real, navigable link
 results.footerGame = footer.includes('#game') && footer.includes('UndeadOverhaul');
 

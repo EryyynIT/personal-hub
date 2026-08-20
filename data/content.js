@@ -201,7 +201,7 @@ const team = [
     about: "Code, systems and everything that makes the game actually run.",
     avatarText: "E",
     links: [
-      { id: "x", label: "X", url: "https://x.com/Eryyyn_IT" },
+      { id: "x", label: "X", url: "https://x.com/EryyynIT" },
       { id: "tiktok", label: "TikTok", url: "https://www.tiktok.com/@barbaris.yt" }
     ]
   },
@@ -237,8 +237,8 @@ const socials = [
   {
     id: "x",
     label: "X",
-    handle: "@Eryyyn_IT",
-    url: "https://x.com/Eryyyn_IT",
+    handle: "@EryyynIT",
+    url: "https://x.com/EryyynIT",
     note: "Personal developer account — projects, experiments, updates."
   },
   {
@@ -288,7 +288,7 @@ const support = {
 const footer = {
   line: "Built by hand — no frameworks, no trackers, no nonsense.",
   links: [
-    { id: "x", label: "X", url: "https://x.com/Eryyyn_IT" },
+    { id: "x", label: "X", url: "https://x.com/EryyynIT" },
     { id: "github", label: "GitHub", url: "https://github.com/EryyynIT" },
     { id: "boosty", label: "Boosty", url: "https://boosty.to/eryyynit" },
     { id: "game", label: "UndeadOverhaul", url: "#game" },
