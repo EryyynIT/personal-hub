@@ -97,8 +97,8 @@ const CONTENT_EN = {
       status: "In development",
       tier: "flagship",
       description:
-        "An indie game project in active development, built as a two-person team — " +
-        "code and engineering by EryyynIT, art and visual development by the artist.",
+        "An indie game built by two people — code and engineering by EryyynIT, " +
+        "everything visual by the artist.",
       technologies: ["Indie Game", "Two-person team"],
       why: "Building a game in the open — devlogs on Telegram, progress visible as it happens.",
       url: "#game",
@@ -116,7 +116,7 @@ const CONTENT_EN = {
         "Commercial product in the AdTech / CPA space. My work here is backend and product " +
         "engineering — production development, not a study prototype.",
       technologies: [],
-      why: "Commercial experience — production systems instead of study projects.",
+      why: "Commercial experience — production systems, not sandboxes.",
       url: null,
       image: "assets/projects/adnova.svg",
       imageAlt: "ADNova — cover"
@@ -128,10 +128,10 @@ const CONTENT_EN = {
       tier: "featured",
       description:
         "An event-driven payment microservice built with FastAPI and RabbitMQ — outbox pattern, " +
-        "dead letter queue, idempotency and webhook notifications. A deep-dive into reliable " +
+        "dead letter queue, idempotency and webhook notifications. A hands-on look at reliable " +
         "messaging and retry logic.",
       technologies: ["FastAPI", "RabbitMQ", "PostgreSQL", "Docker"],
-      why: "Built to get comfortable with event-driven architecture and failure handling in real systems.",
+      why: "Built to get comfortable with event-driven architecture — and with what happens when a message arrives twice, out of order, or not at all.",
       url: "https://github.com/EryyynIT/async-payment-processing-service",
       urlLabel: "View on GitHub",
       image: "assets/projects/async-payment.svg",
@@ -416,8 +416,8 @@ const CONTENT_RU = {
       status: "В разработке",
       tier: "flagship",
       description:
-        "Инди-игра в активной разработке — команда из двух человек: код и инженерия от " +
-        "EryyynIT, арт и визуальная разработка от художника.",
+        "Инди-игра, которую делают вдвоём, — код и инженерия от EryyynIT, " +
+        "весь визуал — от художника.",
       technologies: ["Indie Game", "Команда из двух человек"],
       why: "Игра строится открыто — девлоги в Telegram, прогресс виден в реальном времени.",
       url: "#game",
@@ -435,7 +435,7 @@ const CONTENT_RU = {
         "Коммерческий продукт в сфере AdTech / CPA. Моя работа здесь — backend и product " +
         "engineering: производственная разработка, а не учебный прототип.",
       technologies: [],
-      why: "Коммерческий опыт — продакшен-системы вместо учебных проектов.",
+      why: "Коммерческий опыт — продакшен-системы, а не песочницы.",
       url: null,
       image: "assets/projects/adnova.svg",
       imageAlt: "ADNova — обложка"
@@ -447,10 +447,10 @@ const CONTENT_RU = {
       tier: "featured",
       description:
         "Событийный платёжный микросервис на FastAPI и RabbitMQ — паттерн outbox, очередь " +
-        "мёртвых писем, идемпотентность и вебхук-уведомления. Глубокое погружение в надёжный " +
+        "мёртвых писем, идемпотентность и вебхук-уведомления. Практический взгляд на надёжный " +
         "обмен сообщениями и логику повторов.",
       technologies: ["FastAPI", "RabbitMQ", "PostgreSQL", "Docker"],
-      why: "Создан, чтобы освоить событийную архитектуру и обработку сбоев в реальных системах.",
+      why: "Создан, чтобы освоить событийную архитектуру — и понять, что происходит, когда сообщение приходит дважды, не в том порядке или не приходит вовсе.",
       url: "https://github.com/EryyynIT/async-payment-processing-service",
       urlLabel: "Смотреть на GitHub",
       image: "assets/projects/async-payment.svg",
