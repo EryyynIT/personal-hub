@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>EryyynIT — Backend Developer · Go / Python</title>
+  <meta name="description" content="EryyynIT is a backend developer working in Go and Python (FastAPI). This is the personal hub: projects, experiments, infrastructure, AI tools and an indie game in development.">
+  <meta name="author" content="EryyynIT">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#0b0e12">
+
+  <!-- ===== Theme bootstrap: apply saved / system theme before first paint ===== -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var systemLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (systemLight ? 'light' : 'dark'));
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+
+  <!-- ===== Language bootstrap: match the visitor's browser language when no
+         explicit choice was made yet: Russian-preferring visitors get the RU
+         page, everyone else the EN page. An explicit EN/RU choice is saved to
+         localStorage by main.js and always wins over auto-detection. ===== -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('lang');
+        var page = (document.documentElement.getAttribute('lang') || 'en').toLowerCase();
+        var preferred = String(
+          (navigator.languages && navigator.languages.length && navigator.languages[0]) ||
+          navigator.language || navigator.userLanguage || 'en'
+        ).toLowerCase();
+        var prefersRu = preferred.indexOf('ru') === 0;
+        var target = null;
+        if (saved === 'en' || saved === 'ru') {
+          // An explicit choice via the EN/RU switcher always wins.
+          if (saved !== page) target = saved;
+        } else if (prefersRu && page === 'en') {
+          // No explicit choice yet: a Russian-preferring browser gets the RU page.
+          target = 'ru';
+        } else if (!prefersRu && page === 'ru') {
+          // No explicit choice yet: a non-Russian-preferring browser gets the EN page.
+          target = 'en';
+        }
+        if (target === 'ru' && page === 'en') location.replace('ru/');
+        else if (target === 'en' && page === 'ru') location.replace('../');
+      } catch (e) {
+        /* localStorage / navigator unavailable — keep the current page */
+      }
+    })();
+  </script>
+
+  <!-- ===== SEO: canonical + hreflang =================================== -->
+  <link rel="canonical" href="https://eryyynit.github.io/personal-hub/">
+  <link rel="alternate" hreflang="en" href="https://eryyynit.github.io/personal-hub/">
+  <link rel="alternate" hreflang="ru" href="https://eryyynit.github.io/personal-hub/ru/">
+  <link rel="alternate" hreflang="x-default" href="https://eryyynit.github.io/personal-hub/">
+
+  <!-- ===== Open Graph ================================================== -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EryyynIT — Backend Developer · Go / Python">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="EryyynIT — Backend Developer · Go / Python">
+  <meta property="og:description" content="Backend developer working with Go and Python (FastAPI). Projects, experiments, infrastructure, AI tools and an indie game in development.">
+  <meta property="og:url" content="https://eryyynit.github.io/personal-hub/">
+  <meta property="og:image" content="https://eryyynit.github.io/personal-hub/assets/og/og-en.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="EryyynIT — Backend Developer · Go / Python">
+
+  <!-- ===== Twitter / X card ============================================ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EryyynIT — Backend Developer · Go / Python">
+  <meta name="twitter:description" content="Backend developer — Go, Python, FastAPI. Projects, experiments and an indie game in development.">
+  <meta name="twitter:image" content="https://eryyynit.github.io/personal-hub/assets/og/og-en.png">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ================= Header ================= -->
+  <header class="site-header" id="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="#home" aria-label="EryyynIT — home">
+        <span class="brand-mark" aria-hidden="true">e<span class="brand-cursor">_</span></span>
+        <span class="brand-name">EryyynIT</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a class="nav-link" data-nav href="#about">About</a></li>
+        <li><a class="nav-link" data-nav href="#build">Build</a></li>
+        <li><a class="nav-link" data-nav href="#projects">Projects</a></li>
+        <li><a class="nav-link" data-nav href="#game">Game</a></li>
+        <li><a class="nav-link" data-nav href="#findme">Find me</a></li>
+        <li><a class="nav-link" data-nav href="#support">Support</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <span class="lang-current" aria-current="true">EN</span>
+          <span class="lang-sep" aria-hidden="true">/</span>
+          <a class="lang-link" href="ru/" lang="ru" hreflang="ru">RU</a>
+        </div>
+        <button class="icon-btn theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="icon-btn menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-controls="nav-links" aria-expanded="false">
+          <svg class="icon icon-menu" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"></svg>
+          <svg class="icon icon-close" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"></svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ================= Hero ================= -->
+    <section id="home" class="hero">
+      <div class="container">
+        <p class="hero-kicker" aria-hidden="true"><span class="prompt">~/eryyynit</span> whoami → backend developer · go / python</p>
+        <h1 class="hero-name">Eryyyn<span class="accent">IT</span><span class="hero-cursor" aria-hidden="true">_</span></h1>
+        <p class="hero-role">Backend Developer · Go / Python</p>
+        <p class="hero-title">I build software, games, and things that <em>weren't here yesterday</em>.</p>
+        <p class="hero-text">This is the personal hub of EryyynIT — a backend developer who ships Go and Python services, experiments with infrastructure and AI, and builds an indie game on the side.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#projects">Projects</a>
+          <a class="btn btn-ghost" href="https://github.com/EryyynIT" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a class="btn btn-ghost" href="#about">About</a>
+        </div>
+        <ul class="hero-tags" aria-label="Focus areas">
+          <li>Backend</li>
+          <li>Go</li>
+          <li>Python</li>
+          <li>Distributed Systems</li>
+          <li>Game Development</li>
+          <li>AI</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= Footer ================= -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-copy">© <span id="year">2026</span> EryyynIT</p>
+        <p class="footer-tag"></p>
+      </div>
+      <ul class="footer-links"></ul>
+    </div>
+  </footer>
+
+  <script src="data/content.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
